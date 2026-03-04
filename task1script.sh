@@ -16,7 +16,21 @@ do
 			free -t
 			echo ""
 			echo "Displaying CPU Status:"
-			top -bn1 | grep "Cpu(s)";;
+			top -bn1 | grep "Cpu(s)"
+			top -o %MEM -d 5 -b -n 1|grep "load average" -A 16
+			select opt2 in "Terminate Process" Back
+			do
+				case $opt2 in 
+					"Terminate Process")
+						echo "Terminate";;
+					"Back")
+						break;;
+					*)
+					echo "Invalid Choice, please select again.";;
+				esac
+			done
+			REPLY=
+			;;
 		"Disk Inspection and Log Archiving")
 			echo "Option 2 chosen";;
 		"Logging System")
