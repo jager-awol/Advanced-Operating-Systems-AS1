@@ -23,9 +23,9 @@ do
 						top -o %MEM -d 5 -b -n 1|grep "load average" -A 16
 						echo "";;
 					"Terminate Process")
-						# tPID="USER INPUT"
+						# tPID="User input for PID to terminate"
 						read -p "Enter PID to terminate: " tPID
-						# confirm="USER INPUT"
+						# confirm="User input for confirmation of program termination"
 						printf "Are you sure you want to terminate %s?\nY/N: " "$tPID"
 						read confirm
 						case $confirm in
@@ -51,16 +51,48 @@ do
 					echo -e "Invalid Choice, please select again.\n";;
 				esac
 			done
+			echo ""
 			REPLY=
 			;;
 		"Disk Inspection and Log Archiving")
-			echo "Option 2 chosen";;
+			echo -e "\nCurrent location:"
+			pwd
+			echo -e "\nNearby directories:"
+			ls -d */
+			echo ""
+			while :
+			do	
+				# dDirectory="User input for directory to inspect"
+				printf "Enter a directory to inspect:%s\n"
+				read dDirectory
+				du -h -s $dDirectory
+				echo ""
+				# confirm="User input for exiting to first menu or continuing"
+				printf "Do you want to inspect another directory?%s?\nY/N: "
+				read confirm
+				case $confirm in 
+					"Y")
+						;;
+					"N")
+						echo -e "\nReturning to menu....\n"
+						break;;
+					*)
+					echo -e "\nInvalid Choice\n"
+					break
+				esac
+			done
+			REPLY=
+			;;
 		"Logging System")
 			echo "Option 3 chosen";;
 		"Exit")
 			echo "Exiting...."
 			break;;
 		*)
+		echo "Invalid Choice, please select again.";;
+	esac
+done
+
 		echo "Invalid Choice, please select again.";;
 	esac
 done
