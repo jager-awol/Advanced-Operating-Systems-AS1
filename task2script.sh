@@ -21,7 +21,7 @@ do
 			echo ""
 			read -p "Enter Student ID: " SID
 			read -p "Enter Task Name: " name
-			read -p "Enter Task Priority: " priority
+			read -p "Enter Task Priority (1-10): " priority
 			# est time being randomised between 2-20 is just to simulate different task lengths when submitting tasks
 			estTime=$(( RANDOM % 19 + 2 ))
 			# assigning  TID by incrementing on TID of previous task list entry.
