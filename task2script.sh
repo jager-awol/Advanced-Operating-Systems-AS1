@@ -52,7 +52,9 @@ do
 				IFS=',' read -r TID SID name estTime priority <<< "$selected"
 				echo "running task $TID $name by $SID at priority $priority. Estimated $estTime until completion...."
 				sleep $estTime
-				echo "Task $TID complete. Saved to taskComplete.txt."
+				sed -i "/^$TID,/d" taskPending.txt
+				echo $TID,$SID,$name,$estTime,$priority >> taskCompleted.txt
+				echo "Task $TID complete. Saved to taskCompleted.txt."
 				printf "Continue next job? \n (Y/N): "
 				read confirm
 				case $confirm in
@@ -69,7 +71,13 @@ do
 			REPLY=
 			;;
 		"View Completed")
-			echo "option 4 selected"
+			echo -e "\nTaskID, Student ID, Task Name, Estimated Time, Priority"
+			while IFS=',' read -r TID SID name estTime priority
+			do
+				echo "$TID, $SID, $name, $estTime, $priority"
+			done < "taskCompleted.txt"
+			echo ""
+			REPLY=
 			;;
 		"Exit")
 			#confirm = USER INPUT for confirmation on exiting
