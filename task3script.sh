@@ -4,9 +4,11 @@ echo "Please log in to upload submission."
 #attempt = keep track of login attempts to stop at over 3 tries
 #login = keep track of whether login is successful so script continues to submission if login succeeds
 #userInput = keep track of username for logging purposes
+#lastAttempt = keep track of time of last failed login attempt so attempts can rest after 60 seconds
 attempt=0
 login=false
 userInput=""
+lastAttempt=0
 mkdir -p "submissions"
 
 while (( "$attempt" < 3 ))
@@ -22,9 +24,14 @@ do
 		fi
 	done < userDetails.txt
 	if [[ "$login" == "false" ]]; then
+		now=$(date +%s)
+		if ((lastAttempt != 0 && now - lastAttempt >= 60 )); then
+			attempt=0
+		fi
 		((attempt++))
 		echo -e "\nIncorrect username or password. Please try again.\n"
 		echo "Failed login attempt at $(date '+%H:%M:%S %d-%m-%Y')" >> submission_Log.txt
+		lastAttempt=$now
 	else
 		break
 	fi
@@ -99,7 +106,11 @@ if $login; then
 	done
 else
 	#script executes is user is unsuccessful at logging in within 3 attempts
-	echo "login failed, exiting"
+	echo "Too many failed login attempts - Please wait 60 seconds between attempts."
+	echo "Quitting...."
+	sleep 5
+	exit
+fi
 	sleep 5
 	exit
 fi
