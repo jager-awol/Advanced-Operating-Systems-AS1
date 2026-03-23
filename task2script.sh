@@ -21,7 +21,7 @@ do
 			echo ""
 			read -p "Enter Student ID: " SID
 			read -p "Enter Task Name: " name
-			read -p "Enter Task Priority (1-10): " priority
+			read -p "Enter Task Priority: " priority
 			# est time being randomised between 2-20 is just to simulate different task lengths when submitting tasks
 			estTime=$(( RANDOM % 19 + 2 ))
 			# assigning  TID by incrementing on TID of previous task list entry.
@@ -33,6 +33,7 @@ do
 			fi
 			echo $TID,$SID,$name,$estTime,$priority >> taskPending.txt
 			echo -e "\nJob added to pending list.\n"
+			echo "Job $TID $name submitted by $SID at priority $priority and estTime $estTime at $(date '+%H:%M:%S %d-%m-%Y')" >> scheduler_log.txt
 			REPLY=
 			;;
 		"Process Jobs")
@@ -55,6 +56,7 @@ do
 				sed -i "/^$TID,/d" taskPending.txt
 				echo $TID,$SID,$name,$estTime,$priority >> taskCompleted.txt
 				echo "Task $TID complete. Saved to taskCompleted.txt."
+				echo "Task $TID $name completed at $(date '+%H:%M:%S %d-%m-%Y')" >> scheduler_log.txt
 				printf "Continue next job? \n (Y/N): "
 				read confirm
 				case $confirm in
