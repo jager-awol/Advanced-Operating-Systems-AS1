@@ -5,15 +5,21 @@ Date - March 2026
 # Respository Files
 
 README.md
-filename.
-task1script.sh          | System monitor script for Task 1
-task2script.sh          | Job scheduling and processing script for Task 2
-task3script.sh          | Login and submission upload script for Task 3
-taskCompleted.txt       | Optional sample file used by task2script.sh to store completed jobs. If not provided, task2script.sh generates an empty file with the same filename.
-taskPending.txt         | Optional sample file used by task2script.sh to store pending jobs. If not provided, task2script.sh generates an empty file with the same filename.
-userDetails.txt *       | REQUIRED file used by task3script.sh to store user credentials for login system. Credentials can be edited using any plaintext editor on this file. Format: username,password
 
-#Dependencies
+task1script.sh          | System monitor script for Task 1
+
+task2script.sh          | Job scheduling and processing script for Task 2
+
+task3script.sh          | Login and submission upload script for Task 3
+
+taskCompleted.txt       | Optional sample file used by task2script.sh to store completed jobs. If not provided, task2script.sh generates an empty file with the same filename.
+
+taskPending.txt         | Optional sample file used by task2script.sh to store pending jobs. If not provided, task2script.sh generates an empty file with the same filename.
+
+userDetails.txt *       | REQUIRED file used by task3script.sh to store user credentials for login system. Credentials can be edited using any plaintext editor on this file. 
+                            Format: username,password
+
+# Dependencies
 bash version 5.2.37
 
 ## TASKS
